@@ -12,8 +12,8 @@ export default {
   providers: [
     credentials({
       name: "credentials",
-      async authorize(data) {
-        const validated = loginSchema.safeParse(data);
+      async authorize(credentials) {
+        const validated = loginSchema.safeParse(credentials);
         if (validated.success) {
           const { email, password } = validated.data;
 

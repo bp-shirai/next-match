@@ -45,7 +45,7 @@ export function RegisterForm() {
     } else {
       if (Array.isArray(result.error)) {
         result.error.forEach(e => {
-          const fieldName = e.path.join(".") as "email" | "name" | "password";
+          const fieldName = e.path.join(".") as keyof RegisterSchema; //"email" | "name" | "password";
           setError(fieldName, { message: e.message });
         });
       } else {

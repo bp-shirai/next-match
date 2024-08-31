@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { HTMLInputTypeAttribute } from "react";
 import { FieldError, useForm } from "react-hook-form";
 import { GiPadlock } from "react-icons/gi";
+import { toast } from "react-toastify";
 
 export function LoginForm() {
   const router = useRouter();
@@ -49,8 +50,9 @@ export function LoginForm() {
     const result = await signInUser(data);
     if (result.status === "success") {
       router.push("/members");
+      router.refresh();
     } else {
-      console.log(result.error);
+      toast.error(result.error as string);
     }
   };
 
