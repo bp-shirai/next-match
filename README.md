@@ -15,9 +15,20 @@ npm install next-auth@beta
 npm install @prisma/client @auth/prisma-adapter
 npm install prisma --save-dev
 
+npm install bcryptjs
+npm install -D @types/bcryptjs
+
+npm install --save react-toastify
+
 # Initialize Database
 
 npx prisma init
+
+// Create a schema file at prisma/schema.prisma
+
+npx prisma generate
+
+npx prisma db pus
 
 ## Getting Started
 

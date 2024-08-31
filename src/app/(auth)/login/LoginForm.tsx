@@ -1,44 +1,58 @@
 "use client";
 
+import { signInUser } from "@app/actions/authActions";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@lib/schemas/loginSchema";
-import { registerSchema } from "@lib/schemas/RegisterSchema";
+import { LoginSchema, loginSchema } from "@lib/schemas/loginSchema";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
-import email from "next-auth/providers/email";
-import passage from "next-auth/providers/passage";
+import { useRouter } from "next/navigation";
 import { HTMLInputTypeAttribute } from "react";
 import { FieldError, useForm } from "react-hook-form";
 import { GiPadlock } from "react-icons/gi";
 
 export function LoginForm() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
   } = useForm<LoginSchema>({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(loginSchema),
     mode: "onTouched",
     defaultValues: { email: "", password: "" },
   });
 
-  type FormInputProps<T> = {
+  type FormInputProps = {
     label: string;
     type?: HTMLInputTypeAttribute;
-    name: keyof T;
-    error?: FieldError;
+    name: keyof LoginSchema;
   };
 
-  const FormInput = ({ label, type, name, error }: FormInputProps<LoginSchema>) => {
+  const FormInput = ({ label, type, name }: FormInputProps) => {
     return (
       <div className="h-20">
-        <Input label={label} variant="bordered" type={type} {...register(name)} isInvalid={!!error} errorMessage={error?.message} />
+        <Input
+          label={label}
+          variant="bordered"
+          type={type}
+          {...register("password")}
+          isInvalid={!!errors.password}
+          errorMessage={errors.password?.message}
+        />
       </div>
     );
   };
 
-  const onSubmit = (data: LoginSchema) => {};
+  const onSubmit = async (data: LoginSchema) => {
+    const result = await signInUser(data);
+    if (result.status === "success") {
+      router.push("/members");
+    } else {
+      console.log(result.error);
+    }
+  };
 
   return (
     <Card className="w-2/5 mx-auto">
@@ -54,9 +68,27 @@ export function LoginForm() {
       <CardBody>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-4">
-            <FormInput label="Email" type="email" name="email" error={errors.email} />
-            <FormInput label="Password" type="password" name="password" error={errors.password} />
-            <Button isDisabled={!isValid} fullWidth color="secondary" type="submit">
+            <div className="h-20">
+              <Input
+                label="Email"
+                variant="bordered"
+                type="email"
+                {...register("email")}
+                isInvalid={!!errors.email}
+                errorMessage={errors.email?.message}
+              />
+            </div>
+            <div className="h-20">
+              <Input
+                label="Password"
+                variant="bordered"
+                type="password"
+                {...register("password")}
+                isInvalid={!!errors.password}
+                errorMessage={errors.password?.message}
+              />
+            </div>
+            <Button isLoading={isSubmitting} isDisabled={!isValid} fullWidth color="secondary" type="submit">
               Login
             </Button>
           </div>
