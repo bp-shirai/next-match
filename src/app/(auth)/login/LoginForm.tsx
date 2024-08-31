@@ -2,10 +2,12 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@lib/schemas/loginSchema";
-import { RegisterSchema, registerSchema } from "@lib/schemas/RegisterSchema";
+import { registerSchema } from "@lib/schemas/RegisterSchema";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Input } from "@nextui-org/input";
+import email from "next-auth/providers/email";
+import passage from "next-auth/providers/passage";
 import { HTMLInputTypeAttribute } from "react";
 import { FieldError, useForm } from "react-hook-form";
 import { GiPadlock } from "react-icons/gi";
@@ -18,6 +20,7 @@ export function LoginForm() {
   } = useForm<LoginSchema>({
     resolver: zodResolver(registerSchema),
     mode: "onTouched",
+    defaultValues: { email: "", password: "" },
   });
 
   type FormInputProps<T> = {

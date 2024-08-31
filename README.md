@@ -12,6 +12,13 @@ npm install react-hook-form zod @hookform/resolvers
 
 npm install next-auth@beta
 
+npm install @prisma/client @auth/prisma-adapter
+npm install prisma --save-dev
+
+# Initialize Database
+
+npx prisma init
+
 ## Getting Started
 
 First, run the development server:

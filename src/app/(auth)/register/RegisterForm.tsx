@@ -17,6 +17,7 @@ export function RegisterForm() {
   } = useForm<RegisterSchema>({
     resolver: zodResolver(registerSchema),
     mode: "onTouched",
+    defaultValues: { name: "", email: "", password: "" },
   });
 
   type FormInputProps<T> = {
