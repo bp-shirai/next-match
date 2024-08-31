@@ -4,9 +4,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 npm install @nextui-org/theme @nextui-org/system framer-motion
 
-npx nextui-cli@latest add button
+npx nextui-cli@latest add button navbar input card
 
 npm install react-icons
+
+npm install react-hook-form zod @hookform/resolvers
+
+npm install next-auth@beta
 
 ## Getting Started
 
