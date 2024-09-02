@@ -20,10 +20,10 @@ export function NavLink({ href, label }: Props) {
   );
 }
 
-export const NavButton = ({ href, label }: Props) => {
+export function NavButton({ href, label }: Props) {
   return (
     <Button as={Link} href={href} variant="bordered" className="text-white">
       {label}
     </Button>
   );
-};
+}

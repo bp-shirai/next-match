@@ -1,41 +1,26 @@
 "use client";
 
 import { registerUser } from "@app/actions/authActions";
+import { FormInput } from "@components/forms/FormInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema, registerSchema } from "@lib/schemas/RegisterSchema";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
-import { Input } from "@nextui-org/input";
-import { HTMLInputTypeAttribute } from "react";
-import { FieldError, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { GiPadlock } from "react-icons/gi";
 
 export function RegisterForm() {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors, isValid, isSubmitting },
-  } = useForm<RegisterSchema>({
+  const form = useForm<RegisterSchema>({
     resolver: zodResolver(registerSchema),
     mode: "onTouched",
     defaultValues: { name: "", email: "", password: "" },
   });
 
-  type FormInputProps<T> = {
-    label: string;
-    type?: HTMLInputTypeAttribute;
-    name: keyof T;
-    error?: FieldError;
-  };
-
-  const FormInput = ({ label, type, name, error }: FormInputProps<RegisterSchema>) => {
-    return (
-      <div className="h-20">
-        <Input label={label} variant="bordered" type={type} {...register(name)} isInvalid={!!error} errorMessage={error?.message} />
-      </div>
-    );
-  };
+  const {
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting, isValid },
+  } = form;
 
   const onSubmit = async (data: RegisterSchema) => {
     const result = await registerUser(data);
@@ -66,17 +51,19 @@ export function RegisterForm() {
         </div>
       </CardHeader>
       <CardBody>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="space-y-4">
-            <FormInput label="Name" type="text" name="name" error={errors.name} />
-            <FormInput label="Email" type="email" name="email" error={errors.email} />
-            <FormInput label="Password" type="password" name="password" error={errors.password} />
-            {errors.root?.serverError && <p className="text-danger text-sm">{errors.root.serverError.message}</p>}
-            <Button isLoading={isSubmitting} isDisabled={!isValid} fullWidth color="secondary" type="submit">
-              Register
-            </Button>
-          </div>
-        </form>
+        <FormProvider {...form}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="space-y-4">
+              <FormInput name="name" label="Name" type="text" />
+              <FormInput name="email" label="Email" type="email" />
+              <FormInput name="password" label="Password" type="password" />
+              {errors.root?.serverError && <p className="text-danger text-sm">{errors.root.serverError.message}</p>}
+              <Button isLoading={isSubmitting} isDisabled={!isValid} fullWidth color="secondary" type="submit">
+                Register
+              </Button>
+            </div>
+          </form>
+        </FormProvider>
       </CardBody>
     </Card>
   );

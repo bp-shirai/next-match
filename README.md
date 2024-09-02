@@ -18,6 +18,8 @@ npm install -D @types/bcryptjs
 
 npm install --save react-toastify
 
+npm install date-fns
+
 # Initialize Database
 
 npx prisma init
