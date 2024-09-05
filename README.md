@@ -11,9 +11,11 @@ npm install react-hook-form zod @hookform/resolvers
 npm install next-auth@beta
 
 npm install @prisma/client @auth/prisma-adapter
+
 npm install prisma --save-dev
 
 npm install bcryptjs
+
 npm install -D @types/bcryptjs
 
 npm install --save react-toastify
