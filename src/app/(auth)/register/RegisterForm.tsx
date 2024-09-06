@@ -4,6 +4,7 @@ import { registerUser } from "@app/actions/authActions";
 import { FormInput } from "@components/forms/FormInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema, registerSchema } from "@lib/schemas/RegisterSchema";
+import { handleFormServerErrors } from "@lib/util";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { FormProvider, useForm } from "react-hook-form";
@@ -28,14 +29,7 @@ export function RegisterForm() {
     if (result.status === "success") {
       console.log("User registered successfully!!");
     } else {
-      if (Array.isArray(result.error)) {
-        result.error.forEach(e => {
-          const fieldName = e.path.join(".") as keyof RegisterSchema; //"email" | "name" | "password";
-          setError(fieldName, { message: e.message });
-        });
-      } else {
-        setError("root.serverError", { message: result.error });
-      }
+      handleFormServerErrors(result, setError);
     }
   };
 

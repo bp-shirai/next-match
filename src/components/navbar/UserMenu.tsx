@@ -1,7 +1,7 @@
 "use client";
 
 import { signOutUser } from "@app/actions/authActions";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@nextui-org/dropdown";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@nextui-org/react";
 import { Avatar } from "@nextui-org/react";
 import { Session } from "next-auth";
 import Link from "next/link";
@@ -20,7 +20,7 @@ export function UserMenu({ user }: Props) {
           className="transition-transform"
           color="secondary"
           name={user?.name || "user name"}
-          size="sm"
+          size="md"
           src={user?.image || "/images/user.png"}
         />
       </DropdownTrigger>

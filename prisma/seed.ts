@@ -49,7 +49,7 @@ main()
     await prisma.$disconnect;
   });
 
-// Add package.json
+// Add the following line to package.json
 // "prisma": { "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts" }
 
 // npm i -D ts-node

@@ -13,7 +13,7 @@ export default async function PhotosPage({ params }: { params: { userId: string 
           {photos &&
             photos.map(photo => (
               <div key={photo.id}>
-                <Image width={300} height={300} src={photo.url} alt="Image of member" className="object-cover aspect-square" />
+                <Image width={300} src={photo.url} alt="Image of member" className="object-cover aspect-square" />
               </div>
             ))}
         </div>

@@ -22,6 +22,8 @@ npm install --save react-toastify
 
 npm install date-fns
 
+npm install cloudinary next-cloudinary
+
 # Initialize Database
 
 npx prisma init
@@ -30,7 +32,7 @@ npx prisma init
 
 npx prisma generate
 
-npx prisma db pus
+npx prisma db push
 
 ## Getting Started
 

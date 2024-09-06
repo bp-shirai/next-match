@@ -4,7 +4,6 @@ import { LikeButton } from "@components/LikeButton";
 import { calculateAge } from "@lib/util";
 import { Card, CardFooter, Image } from "@nextui-org/react";
 import { Member } from "@prisma/client";
-import { ca } from "date-fns/locale";
 import Link from "next/link";
 
 type Props = {
