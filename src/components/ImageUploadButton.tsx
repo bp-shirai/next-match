@@ -54,7 +54,7 @@ export function ImageUploadButton() {
       {({ open }) => {
         return (
           <button
-            className="flex items-center gap-2 bg-secondary text-white rounded-lg py-2 px-4 hover:bg-secondary/70"
+            className={`flex items-center gap-2 border-2 border-secondary text-secondary rounded-lg py-2 px-4 hover:bg-secondary/10`}
             onClick={() => open()}>
             <HiPhoto size={28} />
             Upload new Image

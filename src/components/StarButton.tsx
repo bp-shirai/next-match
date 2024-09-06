@@ -11,8 +11,8 @@ export function StarButton({ selected, loading }: Props) {
     <div className="relative hover:opacity-80 transition cursor-pointer">
       {!loading ? (
         <>
-          <AiOutlineStar size={32} className="fill-white absolute" />
-          <AiFillStar size={32} className={selected ? "fill-yellow-200" : "fill-neutral-50"} />
+          <AiOutlineStar size={32} className="fill-neutral-300 absolute" />
+          <AiFillStar size={32} className={selected ? "fill-yellow-300" : "fill-neutral-50"} />
         </>
       ) : (
         <>

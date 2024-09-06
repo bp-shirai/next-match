@@ -36,5 +36,6 @@ export async function getMemberPhotosByUserId(userId: string) {
     return member.photos;
   } catch (error) {
     console.log(error);
+    return null;
   }
 }

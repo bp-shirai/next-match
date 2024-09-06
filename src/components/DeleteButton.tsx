@@ -10,8 +10,8 @@ export function DeleteButton({ loading }: Props) {
     <div className="relative hover:opacity-80 transition cursor-pointer">
       {!loading ? (
         <>
-          <AiOutlineDelete size={32} className="fill-white absolute" />
-          <AiFillDelete size={32} className="fill-red-600" />
+          <AiOutlineDelete size={32} className="fill-neutral-200 absolute" />
+          <AiFillDelete size={32} className="fill-red-600 " />
         </>
       ) : (
         <>

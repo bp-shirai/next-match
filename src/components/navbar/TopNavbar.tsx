@@ -5,9 +5,11 @@ import { GiMatchTip } from "react-icons/gi";
 import { NavButton, NavLink } from "./NavLink";
 import { auth } from "@auth";
 import { UserMenu } from "./UserMenu";
+import { getUserInfoForNav } from "@app/actions/userActions";
 
 export async function TopNav() {
   const session = await auth();
+  const userInfo = session?.user && (await getUserInfoForNav());
 
   return (
     <Navbar
@@ -27,8 +29,8 @@ export async function TopNav() {
         <NavLink href="/messages" label="Messages" />
       </NavbarContent>
       <NavbarContent justify="end">
-        {session?.user ? (
-          <UserMenu user={session.user} />
+        {userInfo ? (
+          <UserMenu userInfo={userInfo} />
         ) : (
           <>
             <NavButton href="/login" label="Login" />
