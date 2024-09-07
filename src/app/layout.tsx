@@ -17,7 +17,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <Providers>
           <TopNav />
-          <main className="container mx-auto p-10">{children}</main>
+          <main className="container mx-auto ">{children}</main>
         </Providers>
       </body>
     </html>

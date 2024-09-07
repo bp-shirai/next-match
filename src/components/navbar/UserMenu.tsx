@@ -26,7 +26,7 @@ export function UserMenu({ userInfo }: Props) {
           color="secondary"
           name={userInfo?.name || "user name"}
           size="md"
-          src={transformImageUrl(userInfo?.image) || "/images/user.png"}
+          src={transformImageUrl(userInfo?.image)}
         />
       </DropdownTrigger>
       <DropdownMenu variant="flat" aria-label="User action menu">

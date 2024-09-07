@@ -24,6 +24,8 @@ npm install date-fns
 
 npm install cloudinary next-cloudinary
 
+npm install clsx
+
 # Initialize Database
 
 npx prisma init
